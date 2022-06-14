@@ -3,7 +3,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>JavaScript作業 07_張正昱</title>
+    <title>jQuery作業 07_張正昱</title>
     <link rel="stylesheet" href="HomeWork.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -11,18 +11,18 @@
 </head>
 <body>
     <div id="navibar">
-        <h2>JQuery作業</h2>
+        <h2>jQuery作業</h2>
         <h3>MSIT141 : 07_張正昱</h3>
         <div>
-            <a href="#bookMark3">1、評分系統(部分JQuery)</a>
-            <a href="#bookMark4">2、(未)</a>
+            <a href="#bookMark3">1、評分系統</a>
+            <a href="#bookMark4">2、廣告輪播</a>
             <a href="#bookMark5">3、(未)</a>
             <a href="#bookMark6">4、(未)</a>
 
         </div>
     </div>
     <!--===================1========================-->
-    <h1 id="bookMark3">1、評分系統</h1>
+    <h1 id="bookMark3">1、評價系統</h1>
     <div id="campus3">
         <h2>單擊可評分、雙擊可重置：</h2>
         <div class="locating">
@@ -42,12 +42,22 @@
         </div>
     </div>
     <!--===================4========================-->
-    <h1 id="bookMark4">4、廣告輪播</h1>
+    <h1 id="bookMark4">2、廣告輪播</h1>
 
     <div id="campus4">
 
-        <div id="divMainImg"></div>
-        <div id="divSubImg"></div>
+        <div id="divMainImg">
+            <img id="imgM0" class="imgM" src="images/cm01.jpg" onclick="moveImg(false)" />
+            <a id="url2" href=arrayUrl[2] target="_blank"><img id="imgM1" class="imgM" src="images/cm02.jpg"/></a>
+            <img id="imgM2" class="imgM" src="images/cm03.jpg" onclick="moveImg(true)" />
+        </div>
+        <div id="divSubImg">
+            <img id="imgS0" class="imgS" src="images/cm00.jpg" onmouseover="mouseOverImg(0)"/>
+            <img id="imgS1" class="imgS" src="images/cm01.jpg" onmouseover="mouseOverImg(1)"/>
+            <img id="imgS2" class="imgS" src="images/cm02.jpg" onmouseover="mouseOverImg(2)"/>
+            <img id="imgS3" class="imgS" src="images/cm03.jpg" onmouseover="mouseOverImg(3)"/>
+            <img id="imgS4" class="imgS" src="images/cm04.jpg" onmouseover="mouseOverImg(4)"/>
+        </div>
         <div class="divBtns">
             <button id="resetFrame">框架置中</button>
             <button id="nextImg">前一張</button>
@@ -63,42 +73,9 @@
     </div>
     
     <!--===================5========================-->
-    <h1 id="bookMark5">5、 2010~2025年日曆</h1>
+    <h1 id="bookMark5">3、</h1>
     <div id="campus5">
-        <div class="explain">
-            <h2>月曆</h2>
-            <ul>
-                <li>點擊日期可做標記(藍底色)。</li>
-                <li>點擊上/下個月的日期可直接翻到該月並做標記。</li>
-                <li>翻月功能可以誇年。</li>
-            </ul>
-        </div>
-        <h4>Welcome</h4>
-        <div id="calAndInfo">
-            <div id="divSelect">
-                <select id="selYear"></select><span>年</span>
-                <select id="selMonth"></select><span>月</span>
-                <select id="selDate"></select><span>日</span>
-                <div id="week">
-                    <div class="holiday">Sun.</div>
-                    <div class="weekday">Mon.</div>
-                    <div class="weekday">Tue.</div>
-                    <div class="weekday">Wed.</div>
-                    <div class="weekday">Thu.</div>
-                    <div class="weekday">Fri.</div>
-                    <div class="holiday">Sat.</div>
-                </div>
-                <div id="weekdate">
-                </div>
-            </div>
-            <div id="divInfo">
-                <h3>Information</h3>
-                <div id="divMessage"></div>
-            </div>
-        </div>
-        <div id="divCopyRight">
-            <h4>&copy;2022 MSIT141 07_張正昱 All Rights Reserved.</h4>
-        </div>
+        
     </div>
 </body>
 </html>
