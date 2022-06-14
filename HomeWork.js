@@ -5,56 +5,34 @@ let campus5 = document.getElementById("campus5");
 //==========================1 Ranking System================================
 
     //==================JQuery modification====================
-$("img").mouseover(function () {
-    $(this).css({ borderColor: "aqua", borderRadius:"50%"}).attr("src", "images/dalala.gif")
-        .prevAll().css({ borderColor: "aqua", borderRadius: "50%" }).attr("src", "images/dalala.gif")
-        .end().nextAll().css({ borderColor: "red", borderRadius: "0" }).attr("src", "images/bulala.gif");
-}).mouseout(function () {
-    $(this).parent().children().css({ borderColor: "gray", borderRadius: "20px" }).attr("src", "images/wzs.gif");;
-});
-    //==================JQuery modification====================
-
-
-
 let isClicked = false;
 let RankCount = 0;
 let RankTotal = 0;
 
-function oneClick(i) {
+$("img").hover(ranked, unRanked);
+$("img").click(function (){
     if (isClicked) return;
+    let i = $(this).index();
     RankCount++;
     RankTotal += i;
-    changeToRanked(i);
+    ranked();
     changeRankHistory(i);
     isClicked = true;
-}
-
-function twoClick() {
+})
+$("img").dblclick(function () {
     if (!isClicked) return;
-    changeToUnRanked();
+    unRanked();
     isClicked = false;
+})
+
+function ranked() {
+    $(this).css({ borderColor: "aqua", borderRadius: "50%" }).attr("src", "images/dalala.gif")
+        .prevAll().css({ borderColor: "aqua", borderRadius: "50%" }).attr("src", "images/dalala.gif")
+        .end().nextAll().css({ borderColor: "red", borderRadius: "0" }).attr("src", "images/bulala.gif");
 }
 
-function changeToRanked(i) {
-    for (let j = 1; j < 6; j++) {
-        let item = document.getElementById("s" + j)
-        if (j <= i) {
-            item.src = "images/dalala.gif"
-            item.className="ranked";
-        } else {
-            item.src = "images/bulala.gif"
-            item.className = "unranked";            
-        }
-    }
-}
-
-function changeToUnRanked() {
-    for (let j = 1; j < 6; j++) {
-        let item = document.getElementById("s" + j)
-        item.src = "images/wzs.gif"
-        item.classList = "";
-        item.classList.add("normal");
-    }
+function unRanked() {
+    $(this).parent().children().css({ borderColor: "gray", borderRadius: "20px" }).attr("src", "images/wzs.gif");;
 }
 
 function changeRankHistory(i) {
@@ -63,9 +41,50 @@ function changeRankHistory(i) {
     let ps3 = document.getElementById("preStars3");
     ps1.textContent = `您本次評價： ${i} 星。`
     ps2.textContent = `評價次數： ${RankCount} 次。`
-    var f = Math.round(RankTotal*10 / RankCount) / 10;
+    var f = Math.round(RankTotal * 10 / RankCount) / 10;
     ps3.textContent = `平均星數： ${f} 星。`
 }
+
+    //==================JQuery modification====================
+
+
+//function oneClick(i) {
+//    if (isClicked) return;
+//    RankCount++;
+//    RankTotal += i;
+//    changeToRanked(i);
+//    changeRankHistory(i);
+//    isClicked = true;
+//}
+
+//function twoClick() {
+//    if (!isClicked) return;
+//    changeToUnRanked();
+//    isClicked = false;
+//}
+
+//function changeToRanked(i) {
+//    for (let j = 1; j < 6; j++) {
+//        let item = document.getElementById("s" + j)
+//        if (j <= i) {
+//            item.src = "images/dalala.gif"
+//            item.className="ranked";
+//        } else {
+//            item.src = "images/bulala.gif"
+//            item.className = "unranked";            
+//        }
+//    }
+//}
+
+//function changeToUnRanked() {
+//    for (let j = 1; j < 6; j++) {
+//        let item = document.getElementById("s" + j)
+//        item.src = "images/wzs.gif"
+//        item.classList = "";
+//        item.classList.add("normal");
+//    }
+//}
+
 //==========================4================================
 let divM = document.getElementById("divMainImg");
 let divS = document.getElementById("divSubImg");
