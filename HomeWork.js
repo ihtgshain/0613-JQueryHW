@@ -23,6 +23,24 @@ $("#picStars img").hover(ranked, unRanked)
     isClicked = false;
 });
 
+// $("#picStars img").on({
+//     hover:function(){ranked(), unRanked()},
+//     click:function(){
+//         if (isClicked) return;
+//     let i = $(this).index()+1;
+//     RankCount++;
+//     RankTotal += i;
+//     ranked();
+//     changeRankHistory(i);
+//     isClicked = true;
+//     },
+//     dblclick:function(){
+//         if (!isClicked) return;
+//         unRanked();
+//         isClicked = false;
+//     }
+// });
+
 function ranked() {
     if (isClicked) return;
     $(this).css({ borderColor: "aqua", borderRadius: "50%" }).attr("src", "images/dalala.gif")
@@ -61,30 +79,42 @@ let isStop = false;
 
 function movingAnime(i, direction) {
     setTimeout(resetClass, 300, i);
-    let pics = document.querySelectorAll(".imgM");
-    if (direction) pics.forEach(x => x.classList.add("moveAnimeN"))
-    else pics.forEach(x => x.classList.add("moveAnimeP"))
+    if(direction) $(".imgM").addClass("moveAnimeN")
+    else $(".imgM").addClass("moveAnimeP")
+
+    // let pics = document.querySelectorAll(".imgM");
+    // if (direction) pics.forEach(x => x.classList.add("moveAnimeN"))
+    // else pics.forEach(x => x.classList.add("moveAnimeP"))
 }
 
 function resetClass(i) {
-    let pics = document.querySelectorAll(".imgM");
-    pics.forEach(x => x.className = "imgM");
+    $(".imgM").attr("class","imgM");
     mouseOverImg(i)
+    
+    // let pics = document.querySelectorAll(".imgM");
+    // pics.forEach(x => x.className = "imgM");
 }
 
 function mouseOverImg(i) {
-    isChanged = true;
-    for (let j = 0; j < 3; j++) {
-        let index = i + j +dx - 1;
 
-        if (index >= len) index -= len;
-        else if (index < 0) index += len;
+    $(".imgM").each(function(j,ele){
+        let index=i+j+dx;
+    if (index >= len) index -= len; 
+    else if (index < 0) index += len;  
 
-        document.getElementById("imgM" + j).src = "images/cm0" + index + ".jpg";
+    $(ele).attr("src",`images/cm0${index}.jpg`)
+    if (j == 1) $("#url2").attr("href",`${arrayUrl[index]}`)
+    })
 
-        if (j == 1)     document.getElementById("url2").href = arrayUrl[index];
-        changeFrame(i);
-    }
+    // let index=i+dx-1;
+    // for (let j = 0; j < 3; j++) {
+    //     let index = i + j +dx - 1;
+    //     if (index >= len) index -= len;
+    //     else if (index < 0) index += len;
+    //     document.getElementById("imgM" + j).src = "images/cm0" + index + ".jpg";
+    //     if (j == 1)     document.getElementById("url2").href = arrayUrl[index];  
+    // }
+    changeFrame(i);
 }
 mouseOverImg(frameIndex);
 
