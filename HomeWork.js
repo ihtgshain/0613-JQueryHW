@@ -23,24 +23,6 @@ $("#picStars img").hover(ranked, unRanked)
     isClicked = false;
 });
 
-// $("#picStars img").on({
-//     hover:function(){ranked(), unRanked()},
-//     click:function(){
-//         if (isClicked) return;
-//     let i = $(this).index()+1;
-//     RankCount++;
-//     RankTotal += i;
-//     ranked();
-//     changeRankHistory(i);
-//     isClicked = true;
-//     },
-//     dblclick:function(){
-//         if (!isClicked) return;
-//         unRanked();
-//         isClicked = false;
-//     }
-// });
-
 function ranked() {
     if (isClicked) return;
     $(this).css({ borderColor: "aqua", borderRadius: "50%" }).attr("src", "images/dalala.gif")
@@ -60,45 +42,27 @@ function changeRankHistory(i) {
     $("#preStars3").text(`平均星數： ${f} 星。`);
 };
 //==========================2.廣告輪播================================
-let divM = document.getElementById("divMainImg");
-let divS = document.getElementById("divSubImg");
 let arrayUrl = ["https://twitter.com/fromsoftware_pr","https://twitter.com/Pesoguin1?lang=ja", "https://twitter.com/Zanmyo?lang=ja", "https://twitter.com/pesoguin", "https://mobile.twitter.com/95rn16"];
 let len = arrayUrl.length;
 let frameIndex = 2;
 let dx = 0;
-let isStop = false;
-// let moveDirection = [false, false, true];
-// for (let i = 0; i < len; i++) {
-//     if (i == 1)
-//         divM.innerHTML += `<a id="url${i}" href="${arrayUrl[i + 1]}" target="_blank"><img id="imgM${i}" class="imgM" src="images/cm0${i + 1}.jpg"/></a>`;
-//     else if (i < 3) {
-//         divM.innerHTML += `<img id="imgM${i}" class="imgM" src="images/cm0${i + 1}.jpg" onclick="moveImg(${moveDirection[i]})" />`;
-//     }
-//     divS.innerHTML += `<img id="imgS${i}" class="imgS" src="images/cm0${i}.jpg" onmouseover="mouseOverImg(${i})"/>`;
-// }
+let isStopped = false;
 
 function movingAnime(i, direction) {
     setTimeout(resetClass, 300, i);
     if(direction) $(".imgM").addClass("moveAnimeN")
     else $(".imgM").addClass("moveAnimeP")
-
-    // let pics = document.querySelectorAll(".imgM");
-    // if (direction) pics.forEach(x => x.classList.add("moveAnimeN"))
-    // else pics.forEach(x => x.classList.add("moveAnimeP"))
 }
 
 function resetClass(i) {
     $(".imgM").attr("class","imgM");
     mouseOverImg(i)
-    
-    // let pics = document.querySelectorAll(".imgM");
-    // pics.forEach(x => x.className = "imgM");
 }
 
 function mouseOverImg(i) {
 
     $(".imgM").each(function(j,ele){
-        let index=i+j+dx;
+        let index=i+j+dx-1;
     if (index >= len) index -= len; 
     else if (index < 0) index += len;  
 
@@ -106,25 +70,16 @@ function mouseOverImg(i) {
     if (j == 1) $("#url2").attr("href",`${arrayUrl[index]}`)
     })
 
-    // let index=i+dx-1;
-    // for (let j = 0; j < 3; j++) {
-    //     let index = i + j +dx - 1;
-    //     if (index >= len) index -= len;
-    //     else if (index < 0) index += len;
-    //     document.getElementById("imgM" + j).src = "images/cm0" + index + ".jpg";
-    //     if (j == 1)     document.getElementById("url2").href = arrayUrl[index];  
-    // }
     changeFrame(i);
 }
 mouseOverImg(frameIndex);
 
 function changeFrame(index) {
-    for (let i = 0; i < len; i++) {
-        document.getElementById("imgS" + i).className = "imgS";
-        if (i==index) {
-            document.getElementById("imgS" + i).classList.add("imgFrame");
-        }
-    }
+    $(".imgS").attr("class", "imgS").each(function (i, ele) {
+        if (i == index)
+            $(ele).addClass("imgFrame");
+    })
+
     frameIndex = index;
 }
 
@@ -135,11 +90,12 @@ interval();
 
 function moveImg(direction) {
     setDx(direction);
-    for (let i = 0; i < len; i++) {
+    $(".imgS").each(function (i, ele) {
         let index = i + dx;
         if (index >= len) index -= len;
-        document.getElementById("imgS" + i).src = "images/cm0" + index + ".jpg";
-    }
+        $(ele).prop("src", `images/cm0${index}.jpg`)
+    })
+
     movingAnime(frameIndex,direction);
 }
 
@@ -148,50 +104,49 @@ function setDx(direction) {
     else dx = dx == 0 ? 4 : dx - 1 ;
 }
 
-document.getElementById("nextImg").onclick = () => forBtnMove(true);
-document.getElementById("preImg").onclick = () => forBtnMove(false);
+$("#nextImg").click(function () { forBtnMove(true) })
+$("#preImg").click(function () { forBtnMove(false) })
 
 function forBtnMove(RL) {
     moveImg(RL);
-    if (isStop) return;
+    if (isStopped) return;
     clearInterval(imgTimer);
     interval();
 }
 
-document.getElementById("resetFrame").onclick = () => {
+$("#resetFrame").click(function () {
     frameIndex = parseInt(len / 2);
     mouseOverImg(frameIndex);
-}
+})
 
-document.getElementById("stopMove").onclick = function(){
-    if (isStop) {
-        stopOrRun(isStop);
-        this.textContent = "暫停輪播"
+$("#stopMove").click(function () {
+    if (isStopped) {
+        stopOrRun(isStopped);
+        $(this).text("暫停輪播");
     } else {
-        stopOrRun(isStop);
-        this.textContent = "繼續輪播"
+        stopOrRun(isStopped);
+        $(this).text("繼續輪播");
     }
-    isStop = !isStop;
-}
+    isStopped = !isStopped;
+})
 
-document.getElementById("divMainImg").onmouseout = () => {
-    if (isStop) return;
+$("#divMainImg").mouseout(function () {
+    if (isStopped) return;
     stopOrRun(true);
-}
-
-document.getElementById("divMainImg").onmouseover = () => {
-    if (isStop) return;
+})
+.mouseover(function () {
+    if (isStopped) return;
     stopOrRun(false);
-}
+});
 
 function stopOrRun(sOR) {
     if (sOR) {
         interval();
-        document.getElementById("bookMark4").innerText = "2、廣告輪播"
+        $("#bookMark4").text("2、廣告輪播");
     }
     else {
         clearInterval(imgTimer);
-        document.getElementById("bookMark4").innerText = "2、廣告輪播(暫停中)"
+        $("#bookMark4").text("2、廣告輪播(暫停中)");
     }
 }
 //=========================================================
