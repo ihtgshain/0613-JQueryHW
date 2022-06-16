@@ -149,7 +149,50 @@ function stopOrRun(sOR) {
         $("#bookMark4").text("2、廣告輪播(暫停中)");
     }
 }
-//=========================================================
+//=====================4.郵遞區號====================================
+let selC=$("#selCity");
+let selD=$("#selDistrict")
+let divT=$("#divTable");
+
+let isFirst=true;
+selC.append("<option>選擇縣市</option>")
+
+$(data).each(function(){
+    $(this).each(function(i,c){
+        //console.log(this.districts);
+        selC.append(`<option>${c.name}</option>`)
+        divT.append(`<div id=${i}>${c.name}</div>`)
+        console.log(divT);
+    })
+})
+
+
+
+selC.change(function(){
+    if(isFirst){$("#selCity option:first").remove(); isFirst=false;}
+    let index=selC.get(0).selectedIndex; 
+    generatDis(index);
+});
+
+function generatDis(index){
+    $.each(data,function(i,c){
+        if(i==index){
+            selD.text("");
+            $(c.districts).each(function(i,d){
+                console.log(d);
+                selD.append(`<option>${d.name}</option>`)
+            })
+        }  
+    })
+};
+
+
+
+
+
+
+
+
 
 
 
