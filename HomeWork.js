@@ -180,7 +180,7 @@ selC.change(function () {
 })
 
 selD.change(function () {
-    $("#divSelects").addClass("Navfixed");
+    $("#divSelects").addClass("navFixed");
     let selName = $("#selDistrict").val();
     window.location.href = `${selName}`;
 
