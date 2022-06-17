@@ -159,7 +159,6 @@ let divT=$("#divTable");
 let isFirst = true;
 selC.append("<option>選擇縣市</option>")
 let navP = $("#divSelects").offset().top;
-let navI = $("#infoForZip").offset().top;
 
 $.each(data,function(i, a){
     selC.append(`<option>${a.name}</option>`)
@@ -175,7 +174,7 @@ $.each(data,function(i, a){
 
 selC.change(function () {
     if (isFirst) { $("#selCity option:first").remove(); isFirst = false; }
-        $("#divSelects").addClass("Navfixed");
+    $("#divSelects").addClass("navFixed");
     let index=selC.get(0).selectedIndex; 
     generatDis(index);
 })
