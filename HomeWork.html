@@ -17,7 +17,7 @@
         <div>
             <a href="#bookMark3">1、評分系統</a>
             <a href="#bookMark4">2、廣告輪播</a>
-            <a href="03resize.html" target="_blank">3、置中縮放</a>
+            <a href="3resize.html" target="_blank">3、置中縮放</a>
             <a href="#bookMark5">4、郵遞區號</a>
 
         </div>
@@ -54,11 +54,11 @@
 
         </div>
         <div id="divSubImg">
-            <img id="imgS0" class="imgS" src="images/cm00.jpg" onmouseover="mouseOverImg(0)"/>
-            <img id="imgS1" class="imgS" src="images/cm01.jpg" onmouseover="mouseOverImg(1)"/>
-            <img id="imgS2" class="imgS" src="images/cm02.jpg" onmouseover="mouseOverImg(2)"/>
-            <img id="imgS3" class="imgS" src="images/cm03.jpg" onmouseover="mouseOverImg(3)"/>
-            <img id="imgS4" class="imgS" src="images/cm04.jpg" onmouseover="mouseOverImg(4)"/>
+            <img id="imgS0" class="imgS" src="images/cm00.jpg" onmouseover="mouseOverImg(0)" />
+            <img id="imgS1" class="imgS" src="images/cm01.jpg" onmouseover="mouseOverImg(1)" />
+            <img id="imgS2" class="imgS" src="images/cm02.jpg" onmouseover="mouseOverImg(2)" />
+            <img id="imgS3" class="imgS" src="images/cm03.jpg" onmouseover="mouseOverImg(3)" />
+            <img id="imgS4" class="imgS" src="images/cm04.jpg" onmouseover="mouseOverImg(4)" />
         </div>
         <div class="divBtns">
             <button id="resetFrame">框架置中</button>
@@ -73,7 +73,7 @@
             </ul>
         </div>
     </div>
-    
+
     <!--===================4========================-->
     <h1 id="bookMark5">4、郵遞區號</h1>
     <div id="campus5">
@@ -82,8 +82,18 @@
             <select id="selCity"></select>
             <select id="selDistrict"></select>
         </div>
-        <div id="divTable">
+        <div id="infoForZip">
+            <ul>
+                ※補充說明
+                <li>選擇縣市後會出現行政區選項。</li>
+                <li>自動跳到選擇的行政區處。</li>
+                <li>滾輪向下滾時，選項欄與說明欄會保持在頂端。</li>
+                <li>最底端有「回到郵遞區號最頂端的按鈕。</li>
+            </ul>
         </div>
+        <div id="divTable"></div>
+        
+        <button id="btnTop" class="btn btn-primary">回到郵遞區號表的最頂端</button>
     </div>
 </body>
 </html>

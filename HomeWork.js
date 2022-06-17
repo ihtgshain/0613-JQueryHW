@@ -150,41 +150,71 @@ function stopOrRun(sOR) {
     }
 }
 //=====================4.郵遞區號====================================
+//          a              b
+//data>arr>obj>districts>array>obj>zip
+//            >name                >name
 let selC=$("#selCity");
 let selD=$("#selDistrict")
 let divT=$("#divTable");
-
-let isFirst=true;
+let isFirst = true;
 selC.append("<option>選擇縣市</option>")
+let navP = $("#divSelects").offset().top;
+let navI = $("#infoForZip").offset().top;
 
-$(data).each(function(){
-    $(this).each(function(i,c){
-        //console.log(this.districts);
-        selC.append(`<option>${c.name}</option>`)
-        divT.append(`<div id=${i}>${c.name}</div>`)
-        console.log(divT);
+$.each(data,function(i, a){
+    selC.append(`<option>${a.name}</option>`)
+    divT.append(`<div class=city>${a.name}<div id=${a.name}></div></div>`);
+
+    let nameZip="";
+    $.each(a.districts, function (i, b) {
+        nameZip += `<div id=bm${b.name}><div>${b.zip}</div><div>${b.name}</div><div>`
+        $(`#${a.name}`).append(nameZip);
+        nameZip = "";
     })
 })
 
-
-
-selC.change(function(){
-    if(isFirst){$("#selCity option:first").remove(); isFirst=false;}
+selC.change(function () {
+    if (isFirst) { $("#selCity option:first").remove(); isFirst = false; }
+        $("#divSelects").addClass("Navfixed");
     let index=selC.get(0).selectedIndex; 
     generatDis(index);
-});
+})
+
+selD.change(function () {
+    $("#divSelects").addClass("Navfixed");
+    let selName = $("#selDistrict").val();
+    window.location.href = `${selName}`;
+
+})
 
 function generatDis(index){
     $.each(data,function(i,c){
         if(i==index){
             selD.text("");
             $(c.districts).each(function(i,d){
-                console.log(d);
-                selD.append(`<option>${d.name}</option>`)
+                selD.append(`<option value=#bm${d.name}>${d.zip}:${d.name}</option>`)
+                if (i == 0) window.location.href = `#bm${d.name}`;
             })
         }  
     })
 };
+
+$(window).scroll(function () {
+    let scrollTop = $(this).scrollTop();
+    if (scrollTop > navP) {
+        $("#divSelects").addClass("navFixed")
+        $("#btnTop").addClass("btnFixed")
+    }   
+    else {
+        $("#divSelects").removeClass("navFixed");
+        $("#btnTop").removeClass("btnFixed");
+    } 
+});
+
+$("#btnTop").click(function () {
+    $("html").animate({ scrollTop: navP }, 500)
+})
+
 
 
 

@@ -202,36 +202,79 @@ h1 {
     margin-left: 5%;
 }
 /*======================郵遞區號================================*/
-/* #campus5 {
-    width: 800px;
-    height: 460px;
-    padding: 20px 30px 20px 30px;
-    margin:auto;
-    margin-bottom: 40%;
-    border: 2px solid black;
-    border-radius:40px;
-} */
 #campus5 {
     justify-content:center;
     margin: 15px;
-    margin-left:40%;
-    margin-bottom: 40%;
+    margin-left:30%;
 }
 
 #divTable {
-    border:1px black solid;
-    padding:15px 10px 0px 10px;
-    border-color:blue;
-    background-color:aqua;
+    margin-left: 30%;
 }
 
 #divSelects{
     display:flex;
+    align-items:end;
 }
 
-#divSelects>select{
-    width:80px;
+#divSelects > select {
+    min-width: 60px;    
+    width: fit-content;
 }
+
+.city {
+    display: flex;
+    align-items: center;
+    border-top: 1px blue solid;
+    border-left: 1px blue solid;
+    border-right: 1px blue solid;
+    width: fit-content;
+}
+.city:last-child {
+    border-bottom: 1px blue solid;
+}
+
+.city > div {
+    border-left: 1px blue solid;
+}
+
+.city > div > div {
+    width:100px;
+    display: flex;
+    align-items:end;
+    border-top:1px blue solid;
+}
+.city > div > div:first-child{
+    border-top:none;
+}
+
+.city > div > div div:first-child {
+    width:35px;
+    font-size:20px;
+    border-right: 1px blue solid;
+}
+
+.navFixed {
+    position: fixed;
+    top: 0;
+}
+.btnFixed {
+    position: fixed;
+    bottom: 20px;
+}
+
+#campus5 ul {
+    color: gray;
+    list-style-image: url("images/dusula.gif");
+    list-style-position: inside;
+}
+
+.btn-primary{
+    color:blue;
+    font-size:16px;
+    width:fit-content;
+}
+
 
 
 

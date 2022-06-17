@@ -1,4 +1,7 @@
-let data=[
+//data>arr>obj>districts>array>obj>obj>zip
+//            >name                   >name
+
+let data = [
     {
         "districts": [
             {
